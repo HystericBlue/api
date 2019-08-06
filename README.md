@@ -7,10 +7,10 @@
 * Language, Framework : vue.js
 
 ### /backend
-#### /scraping
-* 설명 : 디시인사이드 프리코네 리다이브 갤러리의 공략글을 scraping 하는 모듈
-* Language : Phython
-
 #### /api
 * 설명 :scraping한 정보를 확인 할 수 있는 웹사이트 api 서버
 * Language, Framework : java, spring
+
+#### /scraping
+* 설명 : 디시인사이드 프리코네 리다이브 갤러리의 공략글을 scraping 하는 모듈
+* Language : Phython
