@@ -1,1 +1,15 @@
+
+backend/.DS_Store
+backend/scraping/.DS_Store
+backend/scraping/.idea/$PRODUCT_WORKSPACE_FILE$
+backend/scraping/.idea/codeStyles/codeStyleConfig.xml
+backend/scraping/.idea/codeStyles/Project.xml
+backend/scraping/.idea/dataSources.local.xml
+backend/scraping/.idea/dataSources.xml
+backend/scraping/.idea/dataSources/26bddec5-9726-42ad-ba21-53b4bc50dd75.xml
+backend/scraping/.idea/misc.xml
+backend/scraping/.idea/modules.xml
+backend/scraping/.idea/workspace.xml
+backend/scraping/testcode/__init__.py
+frontend/.DS_Store
 backend/scraping/testcode/requests-test.py
