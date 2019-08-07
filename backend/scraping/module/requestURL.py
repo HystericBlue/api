@@ -16,13 +16,13 @@ class Url:
         if len(data) == 0:
             data = {}
         if method == 'post':
-            res = requests.post(url, headers=headers, data=data)
+            res = requests.post(url, headers=self.headers, data=data)
         elif method == 'put':
-            res = requests.put(url, headers=headers, data=data)
+            res = requests.put(url, headers=self.headers, data=data)
         elif method == 'delete':
-            res = requests.delete(url, headers=headers, data=data)
+            res = requests.delete(url, headers=self.headers, data=data)
         else:
-            res = requests.get(url, headers=headers, data=data)
+            res = requests.get(url, headers=self.headers, data=data)
         htmlstring = res.text
         return htmlstring
         print('==> htmlObject End')
