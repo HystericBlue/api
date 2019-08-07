@@ -8,20 +8,6 @@
 
 HELP.md
 .gradle
-build/
-!**/build.js
-!**/check-versions.js
-!**/dev-client.js
-!**/dev-server.js
-!**/load-minified.js
-!**/logo.png
-!**/service-worker-dev.js
-!**/service-worker-prod.js
-!**/utils.js
-!**/vue-loader.conf.js
-!**/webpack.base.conf.js
-!**/webpack.dev.conf.js
-!**/webpack.prod.conf.js
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
 !**/src/test/**
