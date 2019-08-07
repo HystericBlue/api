@@ -50,3 +50,4 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+backend/scraping/module/common/__init__.py
