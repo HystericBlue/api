@@ -9,19 +9,19 @@
 HELP.md
 .gradle
 build/
-!build/build.js
-!build/check-versions.js
-!build/dev-client.js
-!build/dev-server.js
-!build/load-minified.js
-!build/logo.png
-!build/service-worker-dev.js
-!build/service-worker-prod.js
-!build/utils.js
-!build/vue-loader.conf.js
-!build/webpack.base.conf.js
-!build/webpack.dev.conf.js
-!build/webpack.prod.conf.js
+!**/build.js
+!**/check-versions.js
+!**/dev-client.js
+!**/dev-server.js
+!**/load-minified.js
+!**/logo.png
+!**/service-worker-dev.js
+!**/service-worker-prod.js
+!**/utils.js
+!**/vue-loader.conf.js
+!**/webpack.base.conf.js
+!**/webpack.dev.conf.js
+!**/webpack.prod.conf.js
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
 !**/src/test/**
@@ -50,3 +50,17 @@ out/
 
 ### VS Code ###
 .vscode/
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/test/unit/coverage/
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
