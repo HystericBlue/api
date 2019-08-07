@@ -5,6 +5,7 @@
 **/.DS_Store
 **/__pycache__/*
 **/*.iml
+**/**/__init__.py
 
 HELP.md
 .gradle
@@ -50,4 +51,3 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
-backend/scraping/module/common/__init__.py
