@@ -16,9 +16,19 @@ post = soup.select('div.view_content_wrap')
 
 for divHtml in post:
     i = 0
-    subject = divHtml.select('h3.title.ub-word')
+    category = divHtml.select('h3.title.ub-word > span.title_headtext')
+    subject = divHtml.select('h3.title.ub-word > span.title_subject')
     article = divHtml.select('div.writing_view_box > div')
+    articleIa = divHtml.select('div.writing_view_box > div > div > img')
+    articleText = article[1].text.strip()
+    articleImage = articleIa[0].get('src')
+    i = i + 1
+    print(i, ":", category)
     i = i + 1
     print(i, ":", subject)
+    i = i + 1
+    print(i, ":", articleText)
+    i = i + 1
+    print(i, ":", articleImage)
     i = i + 1
     print(i, ":", article[1])
