@@ -22,13 +22,8 @@ for divHtml in post:
     articleIa = divHtml.select('div.writing_view_box > div > div > img')
     articleText = article[1].text.strip()
     articleImage = articleIa[0].get('src')
-    i = i + 1
-    print(i, ":", category)
-    i = i + 1
-    print(i, ":", subject)
-    i = i + 1
-    print(i, ":", articleText)
-    i = i + 1
-    print(i, ":", articleImage)
-    i = i + 1
-    print(i, ":", article[1])
+    print("category :", category)
+    print("subject :", subject)
+    print("article text :", articleText)
+    print("article img :", articleImage)
+    print("article raw :", article[1])
