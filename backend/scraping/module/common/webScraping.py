@@ -2,6 +2,9 @@ import requests
 
 # webScraping.py
 class init:
+    """
+    headers : (dict) url
+    """
     def __init__(self, headers):
         if len(headers) == 0:
             self.headers = {
@@ -16,10 +19,11 @@ class init:
         else:
             self.headers = headers
         print('headers : ', self.headers)
+
     """
     arglist[0] : (str) url
     arglist[1] : (str) method
-    arglist[2] : (map) data 
+    arglist[2] : (dict) params 
     :returns code, meesage, data
     """
     def targetsite(self, *arglist):
@@ -32,24 +36,24 @@ class init:
         elif len(arglist) == 2:
             url = arglist[0]
             method = arglist[1]
-            data = {}
+            params = {}
         elif len(arglist) == 3:
             url = arglist[0]
             method = arglist[1]
             if type(arglist[2]) == dict:
-                data = arglist[2]
+                params = arglist[2]
             else:
-                data = {}
+                params = {}
         else:
             retmap = {'code': 404, 'message': 'argument 수가 초과되었습니다.'}
             return retmap
         if method == 'post':
-            res = requests.post(url, headers=self.headers, data=data)
+            res = requests.post(url, headers=self.headers, data=params)
         elif method == 'put':
-            res = requests.put(url, headers=self.headers, data=data)
+            res = requests.put(url, headers=self.headers, data=params)
         elif method == 'delete':
-            res = requests.delete(url, headers=self.headers, data=data)
+            res = requests.delete(url, headers=self.headers, data=params)
         else:
-            res = requests.get(url, headers=self.headers, data=data)
+            res = requests.get(url, headers=self.headers, data=params)
         retmap = {'code': res.status_code, 'message': '성공하였습니다.', 'data': res.text}
         return retmap
