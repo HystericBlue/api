@@ -51,5 +51,5 @@ class init:
             res = requests.delete(url, headers=self.headers, data=data)
         else:
             res = requests.get(url, headers=self.headers, data=data)
-            retmap = {'code': res.status_code, 'message': '성공하였습니다.', 'data': res.text}
+        retmap = {'code': res.status_code, 'message': '성공하였습니다.', 'data': res.text}
         return retmap
