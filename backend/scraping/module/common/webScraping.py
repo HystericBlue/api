@@ -36,7 +36,7 @@ class init:
         elif len(arglist) == 3:
             url = arglist[0]
             method = arglist[1]
-            if type(arglist[3]) == dict:
+            if type(arglist[2]) == dict:
                 data = arglist[2]
             else:
                 data = {}
