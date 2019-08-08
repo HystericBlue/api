@@ -15,7 +15,7 @@ for tr in trdata:
     for td in tddata:
         td = str(td)
         if td.find('gall_num') != -1:
-            print('gall_num : ', td)
+            print('gall_num : ', re.sub('<.+?>', '', td, 0).strip())
         else:
             print('gall_num None')
        # if td.find('gall_num') != -1:
