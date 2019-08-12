@@ -2,6 +2,7 @@ import re
 from bs4 import BeautifulSoup
 import webScraping
 import datetime
+import dbConn
 
 webscrraping = webScraping.init({})
 #resdata = webscrraping.targetsite('https://gall.dcinside.com/mgallery/board/lists?id=purikone_redive', 'get')
@@ -20,17 +21,13 @@ for tr in trdata:
     gallTit = (re.sub('<.+?>', '', gallTit, 0).strip())
     gallTiturl = tr.select('td.gall_tit > a')
     gallTiturl = gallTiturl[0].get('href')
+    gallTiturl = 'https://gall.dcinside.com/mgallery/board' + gallTiturl
     gallWriter = tr.select('td.gall_writer > span')
     gallWriter = str(gallWriter)
     gallWriter = (re.sub('<.+?>', '', gallWriter, 0).strip())
     gallDate = tr.select('td.gall_date')
+    gallDate = gallDate[0].get('title')
     gallDate = str(gallDate)
-    if gallDate.find('.') != -1:
-        gallDate = gallDate
-    else :
-        now = datetime.datetime.now()
-        gallDate = now.strftime('%m.%d')
-    gallDate = (re.sub('<.+?>', '', gallDate, 0).strip())
 
 
     print(gallNum)
@@ -40,46 +37,15 @@ for tr in trdata:
     print(gallWriter)
     print(gallDate)
 
+# DB connect
 
-#    tddata = tr.select('td.gall_num,td.gall_subject,td.gall_tit,td.gall_writer.ub-write,td.gall_date')
-    """
-    tddata = str(trdata.select('td.gall_num,.td.gall_subject,td.gall_tit.ub-word,td.gall_writer ub-write,td.gall_date'))
-    tddata = re.sub('<.+?>', '', tddata, 0).strip()
-    print(tddata)
-    """
-#tddata = str(tddata)
-#print(tddata)
-"""
-    for td in tddata:
-        td = str(td)
-        if td.find('gall_num') != -1:
-            gallNum = (re.sub('<.+?>', '', td, 0).strip())
-            print('gall_num : ', gallNum)
-        else:
-            if td.find('gall_subject') != -1:
-                gallSubject = (re.sub('<.+?>', '', td, 0).strip())
-                print('gall_subject : ', gallSubject)
-            else:
-                if td.find('gall_tit') != -1:
-                    gallTit = td
-                    print(gallTit)
-                    gallTit = gallTit.get('href')
-                    print('gall_tit : ', gallTit)
-                else:
-                    if td.find('td.gall_writer.ub-write') != -1:
-                        gallWriter = (re.sub('<.+?>', '', td, 0).strip())
-                        print('gall_writer : ', gallWriter)
-                    else:
-                        if td.find('td.gall_date') != -1:
-                            gallDate = (re.sub('<.+?>', '', td, 0).strip())
-                            print('gall_writer : ', gallDate)
-                        else:
-                            print('gall_num None')
-"""
+    dbconn = dbConn.init('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
 
-#for trHtml in post:
-#    tr = trHtml.select('td')
-#    for td in tr:
-#        print(":", td)
+    regdate = '2019-08-19 11:41:00'
+    convdate = datetime.datetime.strptime(regdate, '%Y-%m-%d %H:%M:%S').date()
+    print(convdate)
 
-#""", gallCategory, gallSubject, gallSubjectUrl, nickname, date"""
+    param = (gallNum, 'dcinside', 'pricone', gallTiturl, gallTit, gallWriter, gallDate)
+
+    dbconn.insert_list(param)
+
