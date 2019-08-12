@@ -1,8 +1,8 @@
 import pymysql
 
 
-# dbconfig.py
-class DBController:
+# dbConn.py
+class init:
     def __init__(self, host, port, user, password, db):
         self.conn = pymysql.connect(host=host, port=port, user=user, password=password, db=db, charset='utf8')
         self.cursor = self.conn.cursor()
