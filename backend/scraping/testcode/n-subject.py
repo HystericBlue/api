@@ -27,7 +27,7 @@ for tr in trdata:
     gallWriter = (re.sub('<.+?>', '', gallWriter, 0).strip())
     gallDate = tr.select('td.gall_date')
     gallDate = gallDate[0].get('title')
-    gallDate = str(gallDate[0])
+    gallDate = str(gallDate)
 
 
     print(gallNum)
