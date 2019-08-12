@@ -9,6 +9,7 @@ webscrraping = webScraping.init({})
 resdata = webscrraping.targetsite('https://gall.dcinside.com/mgallery/board/lists/?id=purikone_redive&sort_type=N&exception_mode=recommend&search_head=10&page=1', 'get')
 soup = BeautifulSoup(resdata.get('data'), 'html.parser')
 trdata = soup.select('tr.ub-content.us-post')
+
 for tr in trdata:
     gallNum = tr.select('td.gall_num')
     gallNum = str(gallNum[0])
@@ -29,7 +30,6 @@ for tr in trdata:
     gallDate = gallDate[0].get('title')
     gallDate = str(gallDate)
 
-
     print(gallNum)
     print(gallSubject)
     print(gallTit)
@@ -38,7 +38,7 @@ for tr in trdata:
     print(gallDate)
 
 # DB connect
-
+"""
     dbconn = dbConn.init('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
 
     regdate = '2019-08-19 11:41:00'
@@ -48,4 +48,24 @@ for tr in trdata:
     param = (gallNum, 'dcinside', 'pricone', gallTiturl, gallTit, gallWriter, gallDate)
 
     dbconn.insert_list(param)
+"""
+# Article
+    resdataB = webscrraping.targetsite(gallTiturl, 'get')
+    print(resdataB)
+    soupB = BeautifulSoup(resdataB.get('data'), 'html.parser')
+    postArticle = soupB.select('div.view_content_wrap')
 
+    for divHtml in postArticle:
+        print(divHtml)
+        i = 0
+        category = divHtml.select('h3.title.ub-word > span.title_headtext')
+        subject = divHtml.select('h3.title.ub-word > span.title_subject')
+        article = divHtml.select('div.writing_view_box > div> div')
+#       articleIa = divHtml.select('div.writing_view_box > div > div > img')
+#       articleText = article[1].text.strip()
+#       articleImage = articleIa[0].get('src')
+        print("category :", category)
+        print("subject :", subject)
+#       print("article text :", articleText)
+#       print("article img :", articleImage)
+#       print("article raw :", article[1])
