@@ -1,8 +1,11 @@
+import re
 from bs4 import BeautifulSoup
 import webScraping
-import re
+import datetime
+
 webscrraping = webScraping.init({})
-resdata = webscrraping.targetsite('https://gall.dcinside.com/mgallery/board/lists?id=purikone_redive&exception_mode=recommend', 'get')
+#resdata = webscrraping.targetsite('https://gall.dcinside.com/mgallery/board/lists?id=purikone_redive', 'get')
+resdata = webscrraping.targetsite('https://gall.dcinside.com/mgallery/board/lists/?id=purikone_redive&sort_type=N&exception_mode=recommend&search_head=10&page=1', 'get')
 soup = BeautifulSoup(resdata.get('data'), 'html.parser')
 trdata = soup.select('tr.ub-content.us-post')
 for tr in trdata:
@@ -13,7 +16,7 @@ for tr in trdata:
     gallSubject = str(gallSubject)
     gallSubject = (re.sub('<.+?>', '', gallSubject, 0).strip())
     gallTit = tr.select('td.gall_tit > a')
-    gallTit = str(gallTit)
+    gallTit = str(gallTit[0])
     gallTit = (re.sub('<.+?>', '', gallTit, 0).strip())
     gallTiturl = tr.select('td.gall_tit > a')
     gallTiturl = gallTiturl[0].get('href')
@@ -22,6 +25,11 @@ for tr in trdata:
     gallWriter = (re.sub('<.+?>', '', gallWriter, 0).strip())
     gallDate = tr.select('td.gall_date')
     gallDate = str(gallDate)
+    if gallDate.find('.') != -1:
+        gallDate = gallDate
+    else :
+        now = datetime.datetime.now()
+        gallDate = now.strftime('%m.%d')
     gallDate = (re.sub('<.+?>', '', gallDate, 0).strip())
 
 
