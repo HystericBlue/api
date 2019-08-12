@@ -30,16 +30,17 @@ for tr in trdata:
     gallDate = gallDate[0].get('title')
     gallDate = str(gallDate)
 
-    param = (gallNum, 'dcinside', 'pricone', gallTiturl, gallTit, gallWriter, gallDate)
     dbconn = dbConn.init('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
-    
     numchecked = dbconn.gallnum_check(gallNum)
+    print('numchecked : ', numchecked)
     if numchecked == 0:
+        param = (gallNum, 'dcinside', 'pricone', gallTiturl, gallTit, gallWriter, gallDate)
+        dbconn = dbConn.init('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
         dbconn.insert_list(param)
     else:
         print('저장된 데이터 입니다.')
 
-        # Article
+    # Article
     resdataB = webscrraping.targetsite(gallTiturl, 'get')
     print(resdataB)
     soupB = BeautifulSoup(resdataB.get('data'), 'html.parser')
