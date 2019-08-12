@@ -30,26 +30,16 @@ for tr in trdata:
     gallDate = gallDate[0].get('title')
     gallDate = str(gallDate)
 
-    print(gallNum)
-    print(gallSubject)
-    print(gallTit)
-    print(gallTiturl)
-    print(gallWriter)
-    print(gallDate)
-
-# DB connect
-"""
-    dbconn = dbConn.init('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
-
-    regdate = '2019-08-19 11:41:00'
-    convdate = datetime.datetime.strptime(regdate, '%Y-%m-%d %H:%M:%S').date()
-    print(convdate)
-
     param = (gallNum, 'dcinside', 'pricone', gallTiturl, gallTit, gallWriter, gallDate)
+    dbconn = dbConn.init('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
+    
+    numchecked = dbconn.gallnum_check(gallNum)
+    if numchecked == 0:
+        dbconn.insert_list(param)
+    else:
+        print('저장된 데이터 입니다.')
 
-    dbconn.insert_list(param)
-"""
-# Article
+        # Article
     resdataB = webscrraping.targetsite(gallTiturl, 'get')
     print(resdataB)
     soupB = BeautifulSoup(resdataB.get('data'), 'html.parser')
@@ -61,11 +51,12 @@ for tr in trdata:
         category = divHtml.select('h3.title.ub-word > span.title_headtext')
         subject = divHtml.select('h3.title.ub-word > span.title_subject')
         article = divHtml.select('div.writing_view_box > div> div')
-#       articleIa = divHtml.select('div.writing_view_box > div > div > img')
-#       articleText = article[1].text.strip()
-#       articleImage = articleIa[0].get('src')
+        #       articleIa = divHtml.select('div.writing_view_box > div > div > img')
+        #       articleText = article[1].text.strip()
+        #       articleImage = articleIa[0].get('src')
         print("category :", category)
         print("subject :", subject)
 #       print("article text :", articleText)
 #       print("article img :", articleImage)
 #       print("article raw :", article[1])
+
