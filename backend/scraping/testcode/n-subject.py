@@ -11,10 +11,10 @@ soup = BeautifulSoup(resdata.get('data'), 'html.parser')
 trdata = soup.select('tr.ub-content.us-post')
 for tr in trdata:
     gallNum = tr.select('td.gall_num')
-    gallNum = str(gallNum)
+    gallNum = str(gallNum[0])
     gallNum = (re.sub('<.+?>', '', gallNum, 0).strip())
     gallSubject = tr.select('td.gall_subject')
-    gallSubject = str(gallSubject)
+    gallSubject = str(gallSubject[0])
     gallSubject = (re.sub('<.+?>', '', gallSubject, 0).strip())
     gallTit = tr.select('td.gall_tit > a')
     gallTit = str(gallTit[0])
@@ -23,11 +23,11 @@ for tr in trdata:
     gallTiturl = gallTiturl[0].get('href')
     gallTiturl = 'https://gall.dcinside.com/mgallery/board' + gallTiturl
     gallWriter = tr.select('td.gall_writer > span')
-    gallWriter = str(gallWriter)
+    gallWriter = str(gallWriter[0])
     gallWriter = (re.sub('<.+?>', '', gallWriter, 0).strip())
     gallDate = tr.select('td.gall_date')
     gallDate = gallDate[0].get('title')
-    gallDate = str(gallDate)
+    gallDate = str(gallDate[0])
 
 
     print(gallNum)
