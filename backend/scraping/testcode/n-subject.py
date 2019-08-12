@@ -22,7 +22,7 @@ for tr in trdata:
     gallTit = (re.sub('<.+?>', '', gallTit, 0).strip())
     gallTiturl = tr.select('td.gall_tit > a')
     gallTiturl = gallTiturl[0].get('href')
-    gallTiturl = 'https://gall.dcinside.com/mgallery/board' + gallTiturl
+    gallTiturl = 'https://gall.dcinside.com' + gallTiturl
     gallWriter = tr.select('td.gall_writer > span')
     gallWriter = str(gallWriter[0])
     gallWriter = (re.sub('<.+?>', '', gallWriter, 0).strip())
