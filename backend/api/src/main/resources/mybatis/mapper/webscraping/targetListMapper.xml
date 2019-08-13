@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moodopa.pricone.webscraping.mapper.TargetListMapper">
+	<select id="list" parameterType="com.moodopa.pricone.webscraping.vo.TargetListVo" resultType="com.moodopa.pricone.webscraping.vo.TargetListVo">
+        SELECT user_no as userNo,
+        user_name as userName,
+        user_content as userContent,
+        reg_date as regDate
+        FROM users
+        WHERE user_no = #{userNo}
+    </select>
+
+</mapper>
