@@ -12,5 +12,3 @@ class Rex:
         resdata = str(data[0])
         resdata = (re.sub(self.pattern, self.repl, resdata, self.count).strip())
         return resdata
-
-    

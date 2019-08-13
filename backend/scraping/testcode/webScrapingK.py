@@ -13,14 +13,19 @@ for tr in trdata:
     print(tddata)
     """
     for td in tddata:
-        td = str(td)
+        """
         if td.find('gall_num') != -1:
+            td = str(td)
             print('gall_num : ', re.sub('<.+?>', '', td, 0).strip())
         else:
-            print('gall_num None')
-       # if td.find('gall_num') != -1:
-       #     print('gall_num : ', td)
-       # else:
-       #     print('Not in gall_num')
+            print(len(td))
+        """
+        print(len(td))
+        if (len(td) != 1 ):
+            title = td.select('b')
+            atag = td.find('a')
+            print(atag.get('href'))
+            print(title)
+
 
 

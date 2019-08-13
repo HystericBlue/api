@@ -30,13 +30,12 @@ for tr in trdata:
     gallDate = gallDate[0].get('title')
     gallDate = str(gallDate)
 
-    dbconn = dbConn.init('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
-    numchecked = dbconn.gallnum_check(gallNum)
+    dbconn = dbConn.ListTableInit('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
+    numchecked = dbconn.numcheck(gallNum)
     print('numchecked : ', numchecked)
     if numchecked == 0:
         param = (gallNum, 'dcinside', 'pricone', gallTiturl, gallTit, gallWriter, gallDate)
-        dbconn = dbConn.init('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
-        dbconn.insert_list(param)
+        dbconn.insert(param)
     else:
         print('저장된 데이터 입니다.')
 
