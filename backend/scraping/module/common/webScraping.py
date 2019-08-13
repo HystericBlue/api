@@ -45,7 +45,7 @@ class init:
             else:
                 params = {}
         else:
-            retmap = {'code': 404, 'message': 'argument 수가 초과되었습니다.'}
+            retmap = {'code': 500, 'message': 'argument 수가 초과되었습니다.'}
             return retmap
         if method == 'post':
             res = requests.post(url, headers=self.headers, data=params)
