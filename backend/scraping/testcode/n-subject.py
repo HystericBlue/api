@@ -30,7 +30,8 @@ for tr in trdata:
     galldate = galldate[0].get('title')
     galldate = str(galldate)
 
-    print(gallnum)
+    if gallsubject != '공지':
+        print(gallsubject)
     #    dbconn = dbConn.ListTableInit('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
     #    numchecked = dbconn.numcheck(gallnum)
     #    print('numchecked : ', numchecked)
@@ -40,6 +41,5 @@ for tr in trdata:
     #    else:
     #        print('저장된 데이터 입니다.')
 
-    # Article
-    articlex = article.ArticleScr(gallnum, gallsubject)
-    articleparser = articlex.articleparser()
+        articlex = article.ArticleScr(gallnum, galltiturl)
+        articleparser = articlex.articleparser()
