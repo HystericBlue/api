@@ -1,7 +1,7 @@
 import re
 from bs4 import BeautifulSoup
 import webScraping
-import datetime
+import article
 import dbConn
 
 webscrraping = webScraping.init({})
@@ -11,52 +11,35 @@ soup = BeautifulSoup(resdata.get('data'), 'html.parser')
 trdata = soup.select('tr.ub-content.us-post')
 
 for tr in trdata:
-    gallNum = tr.select('td.gall_num')
-    gallNum = str(gallNum[0])
-    gallNum = (re.sub('<.+?>', '', gallNum, 0).strip())
-    gallSubject = tr.select('td.gall_subject')
-    gallSubject = str(gallSubject[0])
-    gallSubject = (re.sub('<.+?>', '', gallSubject, 0).strip())
-    gallTit = tr.select('td.gall_tit > a')
-    gallTit = str(gallTit[0])
-    gallTit = (re.sub('<.+?>', '', gallTit, 0).strip())
-    gallTiturl = tr.select('td.gall_tit > a')
-    gallTiturl = gallTiturl[0].get('href')
-    gallTiturl = 'https://gall.dcinside.com' + gallTiturl
-    gallWriter = tr.select('td.gall_writer > span')
-    gallWriter = str(gallWriter[0])
-    gallWriter = (re.sub('<.+?>', '', gallWriter, 0).strip())
-    gallDate = tr.select('td.gall_date')
-    gallDate = gallDate[0].get('title')
-    gallDate = str(gallDate)
+    gallnum = tr.select('td.gall_num')
+    gallnum = str(gallnum[0])
+    gallnum = (re.sub('<.+?>', '', gallnum, 0).strip())
+    gallsubject = tr.select('td.gall_subject')
+    gallsubject = str(gallsubject[0])
+    gallsubject = (re.sub('<.+?>', '', gallsubject, 0).strip())
+    title = tr.select('td.gall_tit > a')
+    title = str(title[0])
+    title = (re.sub('<.+?>', '', title, 0).strip())
+    galltiturl = tr.select('td.gall_tit > a')
+    galltiturl = galltiturl[0].get('href')
+    galltiturl = 'https://gall.dcinside.com' + galltiturl
+    gallwriter = tr.select('td.gall_writer > span')
+    gallwriter = str(gallwriter[0])
+    gallwriter = (re.sub('<.+?>', '', gallwriter, 0).strip())
+    galldate = tr.select('td.gall_date')
+    galldate = galldate[0].get('title')
+    galldate = str(galldate)
 
-    dbconn = dbConn.ListTableInit('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
-    numchecked = dbconn.numcheck(gallNum)
-    print('numchecked : ', numchecked)
-    if numchecked == 0:
-        param = (gallNum, 'dcinside', 'pricone', gallTiturl, gallTit, gallWriter, gallDate)
-        dbconn.insert(param)
-    else:
-        print('저장된 데이터 입니다.')
+    print(gallnum)
+    #    dbconn = dbConn.ListTableInit('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
+    #    numchecked = dbconn.numcheck(gallnum)
+    #    print('numchecked : ', numchecked)
+    #    if numchecked == 0:
+    #        param = (gallnum, 'dcinside', 'pricone', galltiturl, galltit, gallwriter, galldate)
+    #        dbconn.insert(param)
+    #    else:
+    #        print('저장된 데이터 입니다.')
 
     # Article
-    resdataB = webscrraping.targetsite(gallTiturl, 'get')
-    print(resdataB)
-    soupB = BeautifulSoup(resdataB.get('data'), 'html.parser')
-    postArticle = soupB.select('div.view_content_wrap')
-
-    for divHtml in postArticle:
-        print(divHtml)
-        i = 0
-        category = divHtml.select('h3.title.ub-word > span.title_headtext')
-        subject = divHtml.select('h3.title.ub-word > span.title_subject')
-        article = divHtml.select('div.writing_view_box > div> div')
-        #       articleIa = divHtml.select('div.writing_view_box > div > div > img')
-        #       articleText = article[1].text.strip()
-        #       articleImage = articleIa[0].get('src')
-        print("category :", category)
-        print("subject :", subject)
-#       print("article text :", articleText)
-#       print("article img :", articleImage)
-#       print("article raw :", article[1])
-
+    articlex = article.ArticleScr(gallnum, gallsubject)
+    articleparser = articlex.articleparser()
