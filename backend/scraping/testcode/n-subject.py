@@ -30,16 +30,17 @@ for tr in trdata:
     galldate = galldate[0].get('title')
     galldate = str(galldate)
 
+
     if gallsubject != '공지':
-        print(gallsubject)
-    #    dbconn = dbConn.ListTableInit('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
-    #    numchecked = dbconn.numcheck(gallnum)
-    #    print('numchecked : ', numchecked)
-    #    if numchecked == 0:
-    #        param = (gallnum, 'dcinside', 'pricone', galltiturl, galltit, gallwriter, galldate)
-    #        dbconn.insert(param)
-    #    else:
-    #        print('저장된 데이터 입니다.')
+        print(gallnum, gallsubject, title, galltiturl, gallwriter, galldate)
+        dbconn = dbConn.ListTableInit('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
+        numchecked = dbconn.numcheck(gallnum)
+        print('numchecked : ', numchecked)
+        if numchecked == 0:
+            param = (gallnum, 'dcinside', 'pricone', galltiturl, title, gallwriter, galldate)
+            dbconn.insert(param)
+        else:
+            print('저장된 데이터 입니다.')
 
         articlex = article.ArticleScr(gallnum, galltiturl)
         articleparser = articlex.articleparser()
