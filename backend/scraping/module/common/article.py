@@ -16,9 +16,9 @@ class ArticleScr:
         soup = BeautifulSoup(resdata.get('data'), 'html.parser')
         postarticle = soup.select('div.view_content_wrap')
         for divhtml in postarticle:
-            self.article = divhtml.select('div.writing_view_box > div> div')
-            print(self.article)
-
+            self.article = divhtml.select('div.writing_view_box')
+            articledata = self.article[0]
+            print('articledata :', articledata)
             dbconn = dbConn.CntnTableInit('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
             dbconn.getlistseq(self.gallnum)
-            dbconn.insert(self.gallnum)
+            dbconn.insert(self.gallnum, articledata)
