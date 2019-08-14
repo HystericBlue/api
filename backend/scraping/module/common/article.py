@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import webScraping
+import dbConn
 
 
 class ArticleScr:
@@ -15,8 +16,8 @@ class ArticleScr:
         soup = BeautifulSoup(resdata.get('data'), 'html.parser')
         postarticle = soup.select('div.view_content_wrap')
         for divhtml in postarticle:
- #           category = divHtml.select('h3.title.ub-word > span.title_headtext')
- #           subject = divHtml.select('h3.title.ub-word > span.title_subject')
             self.article = divhtml.select('div.writing_view_box > div> div')
- #           self.articleMap = {'category': category, 'subject': subject, 'article': article }
             print(self.article)
+
+            #dbconn = dbConn.CntnTableInit('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
+            #dbconn.
