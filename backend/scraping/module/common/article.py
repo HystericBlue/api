@@ -19,5 +19,6 @@ class ArticleScr:
             self.article = divhtml.select('div.writing_view_box > div> div')
             print(self.article)
 
-            #dbconn = dbConn.CntnTableInit('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
-            #dbconn.
+            dbconn = dbConn.CntnTableInit('www.moodopa.com', 23306, 'webScraping', '!webScraping23', 'webScraping')
+            dbconn.getlistseq(self.gallnum)
+            dbconn.insert(self.gallnum)
